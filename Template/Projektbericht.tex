@@ -1,0 +1,34 @@
+%###################################################################################%
+%
+%Startdatei fuer den Praxisprojektbericht%
+%
+%###################################################################################%
+
+\input{style.sty}
+\input{glossar}
+
+
+%########Dokument###################################################################%
+
+\begin{document}
+
+\frontmatter
+% Titelseite
+\input{kapitel/titlePage}
+\include{kapitel/erklaerung}
+\include{kapitel/abstract}
+\tableofcontents
+
+\mainmatter
+\include{kapitel/einleitung}
+
+\bibliography{biblio/biblio}
+\listoffigures
+\listoftables
+
+\printglossaries
+
+\appendix
+\include{anhang/testanhang}
+
+\end{document}

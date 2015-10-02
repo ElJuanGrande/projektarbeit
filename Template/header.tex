@@ -1,0 +1,104 @@
+%*******************************************************************************
+%                                                                              *
+%                 Datei: header.tex                                            *
+%                                                                              *
+%                 Stand: 05.06.2015   12.00 Uhr   (Brauer)                     *
+%                                                                              *
+%*******************************************************************************
+
+\documentclass[%
+	a4paper,			% Papierformat
+	oneside,			% einseitiger Druck
+	%twoside,			% zweiseitiger Druck
+	12pt,				% Schriftgröße
+	onecolumn,			% einspaltiger Text
+	%twocolumn,			% zweispaltiger Text
+	openright,			% Kapitel dürfen nur auf einer rechten Seite beginnen
+	openany,			% Kapitel dürfen rechts oder links beginnen
+	parskip=half,		% eine halbe Zeile Abstand zw. Absätzen
+	headsepline,		% Kopfzeilenlinie
+	footsepline,		% Fußzeilenlinie
+	bibliography=totoc,	% Bibliographie im Inhaltsverzeichnis
+	%idxtotoc			% Index im Inhaltsverzeichnis
+	]{scrbook}
+	
+\usepackage[utf8]{inputenc}
+
+\usepackage[
+	left=30mm,
+	right=20mm,
+	top=45mm,
+	bottom=55mm,
+	%includeheadfoot,
+	]{geometry}
+
+% deutsche Silbentrennung etc.
+\usepackage[ngerman]{babel}
+
+% Grafiken: PDF, GIF, PNG
+\usepackage{graphicx}
+
+% Farben
+\usepackage{color}
+\definecolor{LinkColor}{rgb}{0,0,0.6}
+\definecolor{ListingBG}{rgb}{0.9,0.9,0.9}
+
+% Hyperlinks (anklickbar im PDF)
+\usepackage[%
+    pdftitle={Titel der Arbeit},%
+    pdfauthor={Vorname Nachname},%
+    pdfpagemode=UseOutlines
+]{hyperref}   
+
+\hypersetup{%
+    colorlinks=true,%    farbige Links statt Rahmen
+    linkcolor=LinkColor,
+    citecolor=LinkColor,
+    filecolor=LinkColor,
+    menucolor=LinkColor,
+    urlcolor=LinkColor,
+    }
+
+% Quellcode Formatierung
+\usepackage{listings}
+\lstset{%
+    language=Perl, % Programmiersprache
+    numbers=left, % Zeilennummern
+    stepnumber=1, % jede Zeile
+    numbersep=5pt, % Abstand zum Quellcode
+    numberstyle=\tiny, % Schriftgröße
+    breaklines=true, % Zeilenumbrüche zulassen
+    breakautoindent=true, % Einrücken nach Umbruch
+    tabsize=2,  % Tabulator
+    basicstyle=\footnotesize, %
+    showspaces=false, % Leerzeichen anzeigen (true -> underscore)
+    showstringspaces=false, % Leerzeichen in Strings
+    backgroundcolor=\color{ListingBG}, % Hintergrundfarbe
+    captionpos=b,   % Position der Beschreibung (b: bottom)
+    %keywordstyle=\color{red}\bfseries
+}
+
+% erweiterte Tabellen
+\usepackage{array}
+
+% Formelsatz
+\usepackage{amsmath}
+
+% Definition eigener Operatoren (im Header)
+\DeclareMathOperator{\rg}{Rang}  
+
+% Fortlaufende Kapitelüberschriften in der Kopfzeile
+\pagestyle{headings}
+
+\usepackage{scrpage2}
+\pagestyle{scrheadings}
+\setkomafont{pageheadfoot}{\normalfont\bfseries}
+\renewcommand*\chapterpagestyle{scrheadings}
+\renewcommand*\sectionmark[1]{\markright{\thesection\ #1}} 
+\cfoot{}
+\ofoot{\pagemark}
+
+% Stil des Literaturverzeichnis
+\bibliographystyle{alphadin}
+\setbibpreamble{Beispielsweise Hinweis zur Sortierung des
+Literaturverzeichnisses.\par\bigskip}
