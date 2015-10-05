@@ -1,0 +1,227 @@
+\chapter{Grundlagen}
+\section{Besonderheiten in Java 8} \label{sec:grundJava8}
+Mit JavaSE 8 führt Oracle einige interessante Neuerungen in die weit verbreitete Programmiersprache Java ein [ULL14, S. 35]. Die für dieses Projekt wichtigen Änderungen werde ich folgend darlegen.
+\subsection{Default Implementierungen} \label{sec:javaDefault}
+Eine kleinere, aber dennoch einflussreiche Veränderung sind Default-Implementierungen für Interfaces. Das bedeutet, es können in Interfaces Methoden-Bodies ausprogrammiert werden. Wenn eine Klasse ein solches Interface implementiert, müssen die Default-Methoden des Interfaces von der implementierenden Klasse nicht überschrieben werden. Eine solche Methode wird mit dem Schlüsselwort default gekennzeichnet. [Ull14, S. 45f.]
+
+Erwähnenswert ist außerdem, dass nun auch statische Methoden in Interfaces implementiert werden können. [Ull14, S. 48f.]
+
+Durch die Einführung von Default-Methoden können Programmierschnittstellen auf eine neue Weise definiert werden. Außerdem wird das Konstrukt der Functional Interfaces ermöglicht bzw. verbessert.
+\subsection{Functional Interfaces} \label{sec:javaFunctional}
+Functional Interfaces sind ein neues Konstrukt der Java-Sprachdefinition. Ein Functional Interface definiert sich dadurch, dass bei einem Interface nur genau eine Methode durch die implementierende Klasse überschrieben und ausprogrammiert werden muss. Also genau eine abstrakte Methode vorhanden ist. Functional Interfaces alleine haben keine besondere Bedeutung, sind jedoch Voraussetzung für ein anderes, mächtiges Sprachwerkzeug in JavaSE 8 – den Lambda-Ausdrücken. Ein oft verwendetes Beispiel für ein Functional Interface ist das Consumer-Interface. [Ull14, S.63f.]
+\subsection{Stream API} \label{sec:javaStream}
+Die Stream-API ist kein neues Sprachfeature der Java Version 8, aber eine umfangreiche Programmierschnittstelle. Sie bietet Methoden, die auf sogenannten Streams arbeiten. Diese machen es möglich, implizit über Datenstrukturen zu iterieren, ohne dafür ein Schleifenkonstrukt (explizite Iteration) ausprogrammieren zu müssen. Streams sind mithilfe von Generics typisiert, sodass immer klar ist, auf welcher Art von Daten gearbeitet wird. [Ull14, S. 391 f.]
+
+Ein Stream kann aus einer beliebigen Java-Collection erzeugt werden, wie z.B. aus einer ArrayList. Dafür bietet das Collection-Interface die neue Methode Collection.stream() an, die einen Stream zurückliefert, der die aktuellen Elemente der zugrunde liegenden Datenstruktur enthält. Auf diesem Stream können nun verschiedene Operationen ausgeführt werden. [Urm14] Es gibt zwei verschiedene Operationstypen:
+\begin{itemize}
+	\item Intermediate Operations \\z.B. filter(), sorted()
+	\item Terminal Operations \\ z.B. collect()
+\end{itemize}
+
+Die Besonderheit der Intermediate Operations ist, dass diese zu einer Pipeline zusammengeschlossen werden können. Das heißt, jede Intermediate Operation liefert wieder einen Stream zurück, auf der weitere Intermediate Operations oder eine Terminal Operation ausgeführt werden können. Dieser Typ der Operationen dient dem Zweck, den Stream zu manipulieren, sodass die Terminal Operation das gewünschte Ergebnis zurückliefern kann bzw. die nötigen Daten als Input bekommt. Die Stream API stellt dafür verschiedene Methoden bereit, mit denen man die Daten des Streams z.B. filtern, sortieren, reduzieren oder zusammenfassen kann. Auch das Konvertieren eines Streams in einen Stream eines anderen Typs ist möglich. [Urm14]
+
+Eine Terminal Operation beendet die Pipeline und liefert ggf. ein Ergebnis zurück. Es ist nicht zwingend notwendig, dass die Terminal Operation einen Wert zurückgibt, die Methode kann genauso gut mit dem Schlüsselwort void versehen sein. Es ist demnach jede Operation eine Terminal Operation, die keinen Stream zurückliefert. [Urm14]
+
+Die neue Schnittstelle bietet außerdem eine einfache Möglichkeit zur Erzeugung von ParallelStreams, die ohne weiteren Programmieraufwand bestimmte Operationen auf den Quelldaten quasi-gleichzeitig (in mehreren Threads) ausführen. [Urm14]
+
+Es folgt ein Beispiel für die Verwendung von Streams, das zudem verdeutlicht, dass diese sehr gut mit Lambda-Ausdrücken synergieren, die im nächsten Abschnitt genauer beleuchtet werden.
+
+\begin{lstlisting}[
+    language=Java,
+    caption=Beispielcode ohne Stream-API und Lambdas [Urm14,
+    label=code1]
+	List<Transaction> groceryTransactions = new ArrayList<>();
+	for (Transaction t : transactions){
+		if (t.getType() == Transaction.GROCERY) {
+			groceryTransactions.add(t);
+  		}
+	}
+	Collections.sort(groceryTransactions, new Comparator() {
+ 		public int compare(Transaction t1, Transaction t2){
+			return t2.getValue().compareTo(t1.getValue());
+		}
+	});
+	List<Integer> transactionIds = new ArrayList<>();
+	for (Transaction t: groceryTransactions) {
+		transactionsIds.add(t.getId());
+	}
+\end{lstlisting}  
+
+\begin{lstlisting}[
+    language=Java,
+    caption=Beispielcode mit Stream-API und Lambdas [Urm14,
+    label=code2]
+	List<Integer> transactionsIds = transactions.stream()
+		.filter(t -> t.getType() == Transaction.GROCERY)
+		.sorted(comparing(Transaction::getValue).reversed())
+		.map(Transaction::getId)
+		.collect(toList());
+\end{lstlisting}  
+\subsection{Lambda Ausdrücke} \label{sec:javaLambda}
+Lambda-Ausdrücke verhalten sich in der Programmierung wie Kurzschreibweisen für Anonyme Innere Klassen, werden jedoch vom Java-Compiler in einen anderen, performanteren Bytecode übersetzt, der nicht mit einer Anonymen Inneren Klasse gleichzusetzen ist. Daher entstehen auch geringfügige Unterschiede im Verhalten der beiden Konstruktor, die aber zunächst nicht von größerer Relevanz sind. Durch einen Lambda-Ausdruck werden bei der Programmierung für den Compiler überflüssige Informationen einfach weggelassen. Lambdas können immer dort verwendet werden, wo normalerweise eine Anonyme Innere Klasse benutzt werden würde, die ein Functional Interface implementiert. Auf diese Weise wird ein Konzept der funktionalen Programmierung in die Objektorientierung übertragen und kann für prägnanteren Quellcode sorgen.
+
+Ein Lambda-Ausdruck erscheint in zwei bzw. drei verschiedenen Ausprägungen.
+
+\textbf{Ausprägung 1: Der „normale“ Lambda-Ausdruck}
+
+„Normale“ Lambdas werden beschrieben, indem die Bezeichner der Methodenparameter der zu implementierenden Methode in runden Klammern und durch Komma getrennt definiert werden. Den Parametern folgt ein Pfeil „->“ und daraufhin der Methodenkörper in geschwungenen Klammern. Ist nur ein Parameter zu bezeichnen, können die runden Klammern weggelassen werden. Wenn der Methoden-Body nur eine Anweisung umfasst, können die geschwungenen Klammern weggelassen werden. Wenn die einzelne Anweisung eine Return-Anweisung mit einem darauffolgenden Wert ist, wird das Schlüsselwort return ebenfalls weggelassen. [Ora00]
+
+\begin{lstlisting}[
+    language=Java,
+    caption=Anonyme Innere Klasse ohne Lambda,
+    label=code3]
+	Consumer<Integer> consumer = new Consumer<Integer>() {
+		public void accept(Integer i) {
+			System.out.println(i);
+		}
+	};
+\end{lstlisting}  
+
+\begin{lstlisting}[
+    language=Java,
+    caption=Anonyme Innere Klasse ohne Lambda,
+    label=code4]
+	Consumer<Integer> consumer = (i) -> {
+		System.out.println(i);
+	};
+\end{lstlisting}  
+
+\begin{lstlisting}[
+    language=Java,
+    caption=Verkürzter Lambda-Ausdruck,
+    label=code5]
+	Consumer<Integer> consumer = i -> System.out.println(i);	
+\end{lstlisting}  
+
+\textbf{Ausprägung 2: Die Methodenreferenz}
+
+Mit der Methodenreferenz wird ein weiterer Operator eingeführt, der Double-Colon-Operator (::). Unter Verwendung dieser Zeichenkette kann, anstatt eine Anonyme Innere Klasse auszuprogrammieren, eine Methode referenziert werden, welche die gleiche Signatur wie die eigentlich zu implementierende Methode des funktionalen Interfaces hat. [Ull14, S.81f.]
+
+\begin{lstlisting}[
+    language=Java,
+    caption=Beispiel mit Lambda und Methodenreferenz,
+    label=code6]
+	List<String> list = new ArrayList<String>();
+	list.add("abc");
+	list.add("defgh");	
+	
+	// Lambda
+	List<Integer> stringLengths = list.stream().map(string ->
+			string.length()).collect(Collectors.toList());	
+	
+	// Methodenreferenz
+	List<Integer> stringLengths = list.stream().map(String::length).collect(Collectors.toList());
+\end{lstlisting}  
+
+
+Auf die gleiche Weise können statische Methoden sowie Methoden von lokalen Variablen referenziert werden.
+
+\textbf{Ausprägung 3: Die Konstruktorreferenz}
+
+Eine eher untypische Variante der Methodenreferenz ist die Konstruktorreferenz. Sie funktioniert analog zur Methodenreferenz. [Ull14, S83f.]
+
+\begin{lstlisting}[
+    language=Java,
+    caption=Beispiel - Konstruktorreferenz (analog zu vorherigem Beispiel),
+    label=code7]
+	List<Integer> stringLengths = list.stream().map(Integer::new).collect(Collectors.toList());
+\end{lstlisting} 
+
+In diesem Fall wird der Konstruktor new Integer(String s) verwendet, der versucht, den String zu parsen und in einem Integer zu verpacken.
+Zu beachten ist, dass Lambdas keinen neuen Scope für Variablen definieren. Gibt es also in einer Methode eine lokale Variable x, darf ein Methodenparameter eines Lambdas, der in dieser Methode definiert wird, nicht ebenfalls x heißen. [Ora00]
+
+\begin{lstlisting}[
+    language=Java,
+    caption=Lambda-Scope [Ora00,
+    label=code8]
+	int x = 21;
+	Consumer<Integer> myConsumer = (x) -> {...} // Compiler-Error
+\end{lstlisting}
+
+\section{JavaFX} \label{sec:grundJavaFX}
+Bei JavaFX handelt es sich um ein relativ neues GUI-Framework. Die erste Release-Version (JavaFX 8) wurde zusammen mit Java 8 ausgeliefert. JavaFX wurde entwickelt, um das bewährte, aber dennoch veraltete GUI-Framework Swing abzulösen und watet mit modernen Features auf. [Mül15]
+
+\textbf{Deklarative GUI-Definition}
+
+Die Benutzeroberfläche kann sowohl im Java-Code als auch in einer gesonderten FXML-Datei (XML-Syntax) definiert werden. Auch eine Kombination beider Möglichkeiten ist problemlos möglich, da man sich durch spezielle Annotationen in den Java-Klassen die GUI-Komponenten aus den FXML-Dateien anhand einer ID injizieren lassen kann. Dazu ist nur die Annotation @FXML an einer gleichnamigen Membervariable des gleichen Komponententyps von Nöten.
+
+\textbf{Styling per CSS}
+
+Das Aussehen nahezu aller Komponenten kann durch wiederverwendbare CSS-Klassen in gesonderten CSS-Dateien definiert werden. [Mül15]
+
+\textbf{Animationen}
+
+JavaFX stellt eine Reihe von Animationen bereit, die auf verschiedene GUI-Elemente angewandt werden können und so die Eigenschaften dieser verändern. [Mül15]
+
+\textbf{Properties und Bindings}
+
+Mit JavaFX wurden Properties an UI-Komponenten eingeführt, die auf einfache Weise an andere Werte gebunden werden können. Verändert man den Wert des Bindings, werden alle Observer (gebundene Werte) ebenfalls verändert. [Mül15] Solche Properties (ObservableValues) können auch selbst definiert und für andere Zwecke verwendet werden. Sie existieren in verschiedenen Ausprägungen mit unterschiedlicher Typisierung. [Ora01]
+
+\textbf{Die Anwendung}
+
+Die Anwendung, die im Rahmen dieser Ausarbeitung analysiert und erweitert wird, nennt sich FalkoFX. Sie entstand aus einem Kundenprojekt (Falko) eines Automobilherstellers und dient der Anzeige von länderspezifischen Produktionsfreigaben für verschiedene Ausprägungen von Fahrzeugmodellen.
+
+Das Projekt Falko wird neben FalkoFX weiterentwickelt. Während FalkoFX für einen einfachen, möglichst benutzerfreundlichen (lesenden) Zugriff auf die Daten sorgt, bietet der weit komplexere Falko-Client noch vielfältigere Möglichkeiten zum Anlegen, Manipulieren und Pflegen der Daten an. Da die Übersichtlichkeit des FalkoFX-Clients gewährleistet bleiben soll und das Programm einen eingeschränkteren Benutzerkreis als das Ausgangsprojekt hat, bietet es dementsprechend weniger Funktionalitäten.
+\section{Die Anwendung} \label{sec:grundAnwendung}
+Derzeit sind 2 von 3 der für das Release der Software vorgesehenen Anwendungsfälle implementiert. Der dritte Anwendungsfall kommt im Rahmen dieser Arbeit hinzu.
+Der grobe Aufbau eines jeden, derzeit beauftragten, Anwendungsfalles ist folgender:
+
+\begin{enumerate}
+	\item Der Nutzer wechselt zu besagtem Anwendungsfall
+	\item Es öffnet sich ein Bildschirm, in dem der Nutzer die Eigenschaften einstellt, nach denen die Rohdaten gefiltert werden sollen.
+	\item Der Nutzer wechselt zu einer Ergebnisansicht
+	\item Die Daten werden in der gewählten Ansicht dargestellt
+\end{enumerate}
+
+Die getroffene Filterauswahl kann in der Sidebar an der rechten Seite nachvollzogen und bearbeitet werden. Die im Filter auswählbaren Werte sind nach Attributen sortiert. Ein Attribut kann z.B. „Ländername“ und die dazugehörigen Werte „Deutschland, Kanada, Schweiz, …“ lauten. Der Filter wird in einem späteren Abschnitt (Link) noch genauer erläutert.
+
+In jedem Anwendungsfall sind verschiedene Aktionen und Exportmöglichkeiten verfügbar, die aber für diese Ausarbeitung nicht zwangsläufig relevant sind.
+
+\textbf{Anwendungsfall 1}
+
+Der erste Anwendungsfall bezieht sich auf die Anzeige von Länderdaten. Nachdem nach bestimmten Eigenschaften, die ein Land potenziell haben kann, gefiltert wurde, kann das Ergebnis in einer tabellarischen Ansicht oder der Galerie betrachtet werden.
+
+Die Galerie ist eine selbstentwickelte Komponente, die im oberen Bereich Icons, gleich einer Bordüre, anzeigt und je nach Selektion eines dieser Items in einem größeren Bereich eine Detailansicht zu dem selektierten Element darstellt.
+
+\textbf{Anwendungsfall 2}
+
+Der zweite Anwendungsfall ist dem ersten sehr ähnlich. Jedoch geht es hier um die Anzeige von technischen Daten einer großen Anzahl an Fahrzeugen. Bereits im Filter gibt es kleine Unterschiede, die ich später erläutern werde. Die Galerie, die in Anwendungsfall 1 benutzt wurde, entfällt für dieses Szenario, da sie nicht praktikabel wäre.
+
+\textbf{Anwendungsfall 3}
+
+Die grobe Funktionalität des dritten Anwendungsfalles ist ein Teil dieser Projektarbeit. Der Nutzer will in diesem Bereich der Anwendung Produktionsfreigaben für Fahrzeugmodelle einsehen können. Diese Freigaben sind länderabhängig und können unterschiedlich ausfallen. Die wichtigste Information dieser Freigaben sind ein Datum, das den Start der Produktion festlegt und eines, welches das Ende bestimmt.
+
+Um in die Ergebnisansicht dieses Szenarios zu gelangen, muss der Filter sowohl für Länder als auch für Fahrzeuge konfiguriert werden. Für die Kombination der beiden Ergebnismengen werden daraufhin die Produktionsfreigaben angezeigt.
+\section{Codedesign-Patterns} \label{sec:grundPattern}
+\subsection{MVC-Pattern} \label{sec:patternMVC}
+Das MVC-Pattern hilft dabei, den Quellcode zu strukturieren und übersichtlicher zu gestalten. Durch die Anwendung des Entwurfsmusters können Programme in Bereiche mit unterschiedlichen Zuständigkeiten eingeteilt werden. MVC steht für Model-View-Controller. In diese drei entsprechenden Bereiche kann der Code untergliedert werden. [FFSB06, S. 529ff.]
+
+\textbf{Das Model}
+
+Das Model enthält die Datenstrukturen, die für die Verarbeitung benötigt werden und die später angezeigt werden. Der Controller kann die Daten bzw. den Zustand des Models verändern. [FFSB06, S. 529ff.]
+
+\textbf{Die View}
+
+Dieser Bereich entspricht der Benutzeroberfläche, mit der ein Anwender interagieren kann. Es werden auf Basis des Models Daten oder Informationen visualisiert. Die View interagiert mit dem Controller um auf Aktionen des Nutzers zu reagieren. [FFSB06, S. 529ff.]
+
+\textbf{Der Controller}
+
+Der Controller ist die Schnittstelle zwischen Model und View. Er verarbeitet eingegebene Informationen aus der View und manipuliert das Model nach Interpretation dieser. [FFSB06, S. 529ff.]
+
+\textbf{Die Anwendung in FalkoFX}
+
+Auf Codeebene kann das MVC-Pattern durch verschiedene andere Patterns realisiert werden.
+Um die Änderungen des Models zu publizieren und andere Teile der Anwendung zu benachrichtigen ist es eine Möglichkeit, das Observer-Pattern zu verwenden. Genau dies bietet auch JavaFX an. Hier gibt es das Observable-Interface, das es erlaubt, Listener an einer Instanz der implementierenden Klasse zu registrieren, die bei einer Änderung benachrichtigt werden und darauf reagieren können.
+
+In der View wird durch JavaFX das Composite-Pattern angewandt. „Die Anzeige besteht aus ineinander verschachtelten Fenstern, Panels, Buttons, Textlabels und so weiter“ [FFSB06, S. 532]. Mehr als sind in JavaFX die Komponenten intern in einer Baumstruktur angeordnet, dem sogenannten Szenegraphen, was die Verschachtelung gut zeigt.
+
+Im Controller kommt zusammen mit der View das Strategy-Pattern zum Einsatz. Die View selbst kümmert sich nur darum, wie die Darstellung aufgebaut ist. Sie wird mit einer Strategie konfiguriert, die von dem Controller bereitgestellt wird. Die View selbst implementiert keine Programmlogik.
+
+Die Patterns werden in FalkoFX zwar durchgängig verwendet, die Trennung in verschiedene Klassen jedoch ist nicht immer nach der Intention des MVC-Entwurfsmusters durchgeführt worden. Stattdessen verschwimmen in einigen benutzerdefinierten Komponenten die Grenzen zwischen Controller und View. Der Rest des Programmes wird davon allerdings kaum beeinflusst, da die Komponenten eine gekapselte Einheit bilden. Das Model hingegen ist von View und Controller immer entkoppelt.
+\subsection{Command-Pattern} \label{sec:patternCommand}
+Das Command-Pattern beschreibt ein Entwurfsmuster der Softwarearchitektur, bei dem Funktionsaufrufe und Berechnungen in einem Kommando-Objekt gekapselt werden. Die Anweisungen können ausgeführt werden, ohne dass das ausführende Objekt Kenntnis von dem aufrufenden Objekt hat. [OOD00]
+
+Durch die Verwendung von Kommandos können diese nach der Erstellung zu einem beliebigen Zeitpunkt ausgeführt werden, sie können in einer Rangfolge angeordnet werden und sie können Informationen zum Rücknahme enthalten. Außerdem lassen sich die Kommando-Objekte durch Parameter in unterschiedlichen Ausprägungen erzeugen. [Zel00]
+
+Eine Abstrakte Kommando-Klasse gibt die Struktur vor. Dies ist mindestens eine \#execute()-Methode. Diese wird in einer konkreten Implementierung des Kommandos spezifiziert. [OOD00]
+Das konkrete Kommando wird durch den Client erzeugt und enthält Informationen über den Zustand und das Verhalten. Der Client setzt ebenfalls den Receiver im Kommando-Objekt. Der Receiver stellt Methoden-Implementierungen für das Kommando bereit, auf die das Kommando in seiner \#execute()-Methode verweist. Bei jeder Erzeugung kann ein anderer Receiver gesetzt werden, der je eine andere Implementierung der Funktionen bereitstellt und so das Verhalten anders definiert. Zum Schluss wird das Kommando an einen Invoker übergeben, der es zu einem beliebigen (definierten) Zeitpunkt ausführen kann. [OOD00]
