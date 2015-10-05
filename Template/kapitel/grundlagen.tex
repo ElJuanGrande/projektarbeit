@@ -225,3 +225,34 @@ Durch die Verwendung von Kommandos können diese nach der Erstellung zu einem be
 
 Eine Abstrakte Kommando-Klasse gibt die Struktur vor. Dies ist mindestens eine \#execute()-Methode. Diese wird in einer konkreten Implementierung des Kommandos spezifiziert. [OOD00]
 Das konkrete Kommando wird durch den Client erzeugt und enthält Informationen über den Zustand und das Verhalten. Der Client setzt ebenfalls den Receiver im Kommando-Objekt. Der Receiver stellt Methoden-Implementierungen für das Kommando bereit, auf die das Kommando in seiner \#execute()-Methode verweist. Bei jeder Erzeugung kann ein anderer Receiver gesetzt werden, der je eine andere Implementierung der Funktionen bereitstellt und so das Verhalten anders definiert. Zum Schluss wird das Kommando an einen Invoker übergeben, der es zu einem beliebigen (definierten) Zeitpunkt ausführen kann. [OOD00]
+
+\section{Gestaltungsgrundlagen} \label{sec:grundGestalt}
+\subsection{Gestaltgesetze} \label{sec:gestaltGesetze}
+Die Gestaltgesetze basieren auf Forschungen der Gestaltpsychologie. Es sind allgemein gültige Regelungen, die auf alle Bereiche der Wahrnehmung zutreffen.
+
+\textbf{Gesetz der Nähe}
+
+"Dinge, die räumlich nahe beieinander liegen, werden vom Auge gruppiert" [Mos12, S.185]
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=0.2999\textwidth]{grafiken/Gesetz_Naehe.png}
+ \caption{Gesetz der Nähe [Sch00]}
+ \label{fig:gesetz1}
+\end{figure} 
+
+Die Abbildung 2.1 stellt das Gesetz der Nähe dar. Die Wahrnehmung gruppiert die Objekte zu Zeilen, obwohl die Spalten aus gleichartigen Elementen bestehen (siehe auch Gesetz der Ähnlichkeit).
+
+\textbf{Gesetz der Ähnlichkeit}
+
+"Visuell ähnliche Objekte werden vom Auge gruppiert. Die Ähnlichkeit kann durch Farbe, Form, Größe, Textur oder Bewegungsrichtung entstehen" [Mos12, S.185]
+
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=0.2999\textwidth]{grafiken/Gesetz_Aehnl.jpg}
+ \caption{Gesetz der Ähnlichkeit [Gri00]}
+ \label{fig:gesetz2}
+\end{figure} 
+
+Dadurch, dass die Elemente in diesem Fall zueinander den gleichen Abstand haben, die Formen sich jedoch unterscheiden, werden die Elemente durch die Wahrnehmung hier zu Spalten zusammengefasst.

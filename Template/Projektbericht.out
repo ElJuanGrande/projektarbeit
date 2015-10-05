@@ -13,3 +13,16 @@
 \BOOKMARK [1][-]{section.2.4}{Codedesign-Patterns}{chapter.2}% 13
 \BOOKMARK [2][-]{subsection.2.4.1}{MVC-Pattern}{section.2.4}% 14
 \BOOKMARK [2][-]{subsection.2.4.2}{Command-Pattern}{section.2.4}% 15
+\BOOKMARK [1][-]{section.2.5}{Gestaltungsgrundlagen}{chapter.2}% 16
+\BOOKMARK [2][-]{subsection.2.5.1}{Gestaltgesetze}{section.2.5}% 17
+\BOOKMARK [0][-]{chapter.3}{Implementierung}{}% 18
+\BOOKMARK [1][-]{section.3.1}{Filter-Logik}{chapter.3}% 19
+\BOOKMARK [1][-]{section.3.2}{DataProvider}{chapter.3}% 20
+\BOOKMARK [1][-]{section.3.3}{Multi-Filter}{chapter.3}% 21
+\BOOKMARK [1][-]{section.3.4}{Tabellenansicht}{chapter.3}% 22
+\BOOKMARK [0][-]{chapter.4}{Analyse ausgew\344hlter Usability-Probleme}{}% 23
+\BOOKMARK [1][-]{section.4.1}{Situation}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.2}{Filter-Performance}{chapter.4}% 25
+\BOOKMARK [0][-]{chapter.5}{Implementierung der Usability-Verbesserungen}{}% 26
+\BOOKMARK [1][-]{section.5.1}{Pr\344sentation von 2-teiligen Texten in ListCells}{chapter.5}% 27
+\BOOKMARK [1][-]{section.5.2}{Filter-Performance}{chapter.5}% 28
