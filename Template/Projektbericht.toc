@@ -24,6 +24,10 @@
 \contentsline {chapter}{\numberline {4}Analyse ausgew\IeC {\"a}hlter Usability-Probleme}{38}{chapter.4}
 \contentsline {section}{\numberline {4.1}Situation}{38}{section.4.1}
 \contentsline {section}{\numberline {4.2}Filter-Performance}{40}{section.4.2}
+\contentsline {section}{\numberline {4.3}Quellcode-Usability}{42}{section.4.3}
 \contentsline {chapter}{\numberline {5}Implementierung der Usability-Verbesserungen}{44}{chapter.5}
 \contentsline {section}{\numberline {5.1}Pr\IeC {\"a}sentation von 2-teiligen Texten in ListCells}{44}{section.5.1}
 \contentsline {section}{\numberline {5.2}Filter-Performance}{45}{section.5.2}
+\contentsline {chapter}{\numberline {6}Ausblick und Fazit}{48}{chapter.6}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{49}{chapter*.23}
+\contentsline {chapter}{Glossar}{52}{section*.25}

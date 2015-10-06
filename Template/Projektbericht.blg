@@ -1,0 +1,65 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: Projektbericht.aux
+The style file: alphadin.bst
+A level-1 auxiliary file: kapitel/erklaerung.aux
+A level-1 auxiliary file: kapitel/abstract.aux
+A level-1 auxiliary file: kapitel/einleitung.aux
+A level-1 auxiliary file: kapitel/grundlagen.aux
+A level-1 auxiliary file: kapitel/implementierung.aux
+A level-1 auxiliary file: kapitel/analyse.aux
+A level-1 auxiliary file: kapitel/verbesserung.aux
+A level-1 auxiliary file: kapitel/fazit.aux
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: biblio/biblio.bib
+Warning--to sort, need author or key in OracleLambda
+Warning--to sort, need author or key in Command
+Warning--to sort, need author or key in Oxford
+Warning--to sort, need author or key in DIN2006
+Warning--empty year in DIN2006
+You've used 16 entries,
+            4793 wiz_defined-function locations,
+            983 strings with 8479 characters,
+and the built_in function-call counts, 6531 in all, are:
+= -- 670
+> -- 123
+< -- 140
++ -- 150
+- -- 34
+* -- 349
+:= -- 1065
+add.period$ -- 19
+call.type$ -- 16
+change.case$ -- 63
+chr.to.int$ -- 16
+cite$ -- 25
+duplicate$ -- 230
+empty$ -- 535
+format.name$ -- 87
+if$ -- 1398
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 88
+newline$ -- 89
+num.names$ -- 36
+pop$ -- 124
+preamble$ -- 1
+purify$ -- 95
+quote$ -- 0
+skip$ -- 369
+stack$ -- 0
+substring$ -- 312
+swap$ -- 46
+text.length$ -- 26
+text.prefix$ -- 11
+top$ -- 0
+type$ -- 154
+warning$ -- 5
+while$ -- 40
+width$ -- 21
+write$ -- 193
+(There were 5 warnings)

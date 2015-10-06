@@ -9,6 +9,7 @@
 \usepackage{listings}
 \usepackage{float}
 \usepackage{subfig}
+\usepackage{csquotes}
 
 %########Dokument###################################################################%
 
@@ -29,13 +30,16 @@
 \include{kapitel/verbesserung}
 \include{kapitel/fazit}
 
+\nocite{*}
 \bibliography{biblio/biblio}
 \listoffigures
-\listoftables
+%\listoftables
 
+\newpage
+\setglossarystyle{indexgroup}
 \printglossaries
 
 \appendix
-\include{anhang/testanhang}
+%\include{anhang/testanhang}
 
 \end{document}

@@ -1,12 +1,12 @@
 \chapter{Implementierung der Usability-Verbesserungen}
 \section{Präsentation von 2-teiligen Texten in ListCells} \label{sec:verbListCell}
-Die Umsetzung des zweiten Designvorschlages ist nicht so einfach möglich, wie die Grafik zunächst vermuten lässt. Es ist standardmäßig nicht möglich den Text, der in dem Textbereich einer ListCell eingefügt werden soll zu teilen und zwei verschiedene Styles darauf anzuwenden.
+Die Umsetzung des zweiten Designvorschlages ist nicht so einfach möglich, wie die Grafik zunächst vermuten lässt. Es ist standardmäßig nicht möglich den Text, der in dem Textbereich einer ListCell eingefügt werden soll zu teilen und zwei verschiedene Styles (Per \gls{css}-Klasse) auf die Teile des Textes anzuwenden.
 
-Wenn man nicht die ListCell-Klasse erweitern und stark verändern möchte, bleibt nur die Möglichkeit, über die Graphic, die gesetzt werden kann, einen Text einzufügen. Die Graphic entspricht hier nicht einer Grafik im allgemein gebräuchlichen Sinne, sondern einem JavaFX Node, der eine beliebige Ausprägung haben kann. So könnten in der Theorie auch sehr komplexe Elemente als Listenelemente dargestellt werden.
+Wenn man nicht die ListCell-Klasse erweitern und stark verändern möchte, bleibt nur die Möglichkeit, über die Graphic, die gesetzt werden kann, einen Text einzufügen. Die Graphic entspricht hier nicht einer Grafik im allgemein gebräuchlichen Sinne, sondern einem \gls{javafx} Node, der eine beliebige Ausprägung haben kann. So könnten in der Theorie auch sehr komplexe Elemente als Listenelemente dargestellt werden.
 
-Der Text, der in den Listenzellen angezeigt werden soll, erhält die Klasse aus dem DataProvider. Dieser fügt die Teile der Texte bisher zusammen und liefert sie als einen einzelnen String zurück. Bei der Präsentation werden jedoch Teilstrings benötigt. Nun könnte der Text geparst werden und daraufhin wieder aufgespalten, allerdings wäre dieses Vorgehen nicht sinnvoll, da die gleiche Listenzelle auch für Texte funktionieren soll, die nicht aufgeteilt sind. Möglicherweise würde der Text in dem Fall sogar fälschlicherweise fettgedruckt werden. Aus diesem Grund müssen die Texte von vorneherein als Mehrteiliger Text aus dem DataProvider geliefert werden. Die naheliegendste Lösung ist es, ein Array zu benutzen, das die Textteile speichert. Aufgrund der Tatsache, dass die Rückgabewerte aus dem DataProvider auch an anderen Stellen verwendet werden, muss sich das zurückgegebene Objekt nach außen hin wie ein String verhalten. Dies kann dadurch erreicht werden, dass das Array in ein neues Objekt verpackt wird, welches die \#toString()-, \#hashCode()- und \#equals(Object)- Methoden überschreibt und die einzelnen Textteile zuvor zu einem String zusammenfügt.
+Der Text, der in den Listenzellen angezeigt werden soll, erhält die Klasse aus dem \gls{dataProvider}. Dieser fügt die Teile der Texte bisher zusammen und liefert sie als einen einzelnen String zurück. Bei der Präsentation werden jedoch Teilstrings benötigt. Nun könnte der Text geparst werden und daraufhin wieder aufgespalten, allerdings wäre dieses Vorgehen nicht sinnvoll, da die gleiche Listenzelle auch für Texte funktionieren soll, die nicht aufgeteilt sind. Möglicherweise würde der Text in dem Fall sogar fälschlicherweise fettgedruckt werden. Aus diesem Grund müssen die Texte von vorneherein als Mehrteiliger Text aus dem \gls{dataProvider} geliefert werden. Die nächstliegende Lösung ist es, ein Array zu benutzen, das die Textteile speichert. Aufgrund der Tatsache, dass die Rückgabewerte aus dem \gls{dataProvider} auch an anderen Stellen verwendet werden, muss sich das zurückgegebene Objekt nach außen hin wie ein String verhalten. Dies kann dadurch erreicht werden, dass das Array in ein neues Objekt verpackt wird, welches die \textit{\#toString()}-, \textit{\#hashCode()}- und \textit{\#equals(Object)}- Methoden überschreibt und die einzelnen Textteile zuvor zu einem String zusammenfügt.
 
-Die Listenzelle muss jetzt nur noch überprüfen, ob es sich bei dem zurückgelieferten Wert um ein Objekt der Klasse MultiPartString handelt und kann daraufhin den ersten Teil des Textes anders darstellen.
+Die Listenzelle muss jetzt nur noch überprüfen, ob es sich bei dem zurückgelieferten Wert um ein Objekt der Klasse \textit{MultiPartString} handelt und kann daraufhin den ersten Teil des Textes anders darstellen.
 
 Für das korrekte Layout wird ein sogenannter TextFlow verwendet, der die Abstände zwischen den Textpassagen so einstellt, dass die Teile wie ein einziger Fließtext wirken.
 
@@ -15,13 +15,13 @@ Für das korrekte Layout wird ein sogenannter TextFlow verwendet, der die Abstä
 
 Um die Menge an gleichzeitigen Listenaktualisierungen zu reduzieren muss zunächst definiert werden, welche Listen zu welchem Zeitpunkt aktualisiert werden müssen. Das ist zunächst die Liste, die zum aktuellen Zeitpunkt angezeigt wird - die anderen Listen sind dann zwar zeitweise veraltet, dies fällt dem Nutzer jedoch nicht auf, da er die Listen nicht sehen kann. Allerdings muss dann jedes Mal, wenn eine andere Werteliste angezeigt werden soll, diese Liste ebenfalls aktualisiert werden, bevor sie dem Nutzer angezeigt wird.
 
-Das ganze kann nur ermöglicht werden, wenn eine Koppelung mit der Benutzeroberfläche stattfindet. Jedes Mal, wenn der Nutzer ein anderes Attribut auswählt, um die dazu passende Werteliste zu erhalten, wird eine Methode im Filter ausgeführt, die als Parameter das jetzt aktive Attribut erhält. Die dazu gehörige Werteliste wird dann einmal erneuert und nur diese durch den Listener aktuell gehalten.
+Das ganze kann nur ermöglicht werden, wenn eine Koppelung mit der Benutzeroberfläche stattfindet. Jedes Mal, wenn der Nutzer ein anderes \gls{attribut} auswählt, um die dazu passende Werteliste zu erhalten, wird eine Methode im Filter ausgeführt, die als Parameter das jetzt aktive \gls{attribut} erhält. Die dazu gehörige Werteliste wird dann einmal erneuert und nur diese durch den Listener aktuell gehalten.
 
 \textbf{Behebung: Zugriff auf selektierte Werte langsam}
 
 Das Problem der Menge der selektierten Werte musste auf Ebene der Datenstruktur angegangen werden. Je nachdem, wie viele Werte bereits selektiert waren, konnten sich die Laufzeiten für die Suche in dieser Struktur auf insgesamt bis zu mehrere Sekunden verlangsamen (kumulierter Gesamtwert aller Ausführungen, die bei einer Neuselektion eines Attributwertes nötig sind).
 
-Für den schnelleren Zugriff wurde eine weitere Datenstruktur eingeführt, die eine andere Repräsentation der selektierten Werte darstellt. Durch eine HashBasedTable, einer Struktur aus der Google Guava Bibliothek, war es möglich, die Laufzeitkomplexität für einen Zugriff auf die selektierten Werte von $O(n)$ auf $O(1)$ zu verkürzen. Die Struktur ähnelt einer HashMap, arbeitet jedoch auf zwei Dimensionen und bietet die Möglichkeit, 2 Keys zu verwenden, um einen Wert zu erhalten. Da die Zeitdauer zum Auffinden eines solchen Keys in beiden Dimensionen der HashBasedTable konstant ist, ist ein sehr schneller Zugriff auf Elemente möglich.
+Für den schnelleren Zugriff wurde eine weitere Datenstruktur eingeführt, die eine andere Repräsentation der selektierten Werte darstellt. Durch eine HashBasedTable, einer Struktur aus der \textit{Google Guava} Bibliothek, war es möglich, die Laufzeitkomplexität für einen Zugriff auf die selektierten Werte von $O(n)$ auf $O(1)$ zu verkürzen. Die Struktur ähnelt einer HashMap, arbeitet jedoch auf zwei Dimensionen und bietet die Möglichkeit, 2 Keys zu verwenden, um einen Wert zu erhalten. Da die Zeitdauer zum Auffinden eines solchen Keys in beiden Dimensionen der HashBasedTable konstant ist, ist ein sehr schneller Zugriff auf Elemente möglich.
 
 \begin{lstlisting}[
     language=Java,
@@ -30,23 +30,24 @@ Für den schnelleren Zugriff wurde eine weitere Datenstruktur eingeführt, die e
 	private HashBasedTable<AbstractFilterAttribute<A>, Object, Object> fastSelectedValues;
 \end{lstlisting}
 
-In obigem Code-Beispiel wird die Zusammensetzung der neuen Datenstruktur gezeigt. Der erste generische Parameter steht für das Attribut, der zweite für den gesuchten Attributwert. Der dritte Parameter wird nicht verwendet und enthält nur der Boolean-Wert true, damit ein Objekt für das Key-Paar vorhanden ist. Die Existenz eines Key-Paares kann dann mit \#contains(Object, Object) überprüft werden. Die Laufzeit verringert sich dadurch von anfänglich mehreren Sekunden auf wenige Millisekunden. Um unnötigen Rechenaufwand zu vermeiden, wird die Struktur nur einmal aktualisiert, sobald sich die selektierten Werte verändert haben. Ein weiterer Vorteil ist, dass die Erzeugung von vielen Objekten des Typs Pair wegfällt.
+In obigem Code-Beispiel wird die Zusammensetzung der neuen Datenstruktur gezeigt. Der erste generische Parameter steht für das Attribut, der zweite für den gesuchten Attributwert. Der dritte Parameter wird nicht verwendet und enthält nur der Boolean-Wert \textit{true}, damit ein Objekt für das Key-Paar vorhanden ist. Die Existenz eines Key-Paares kann dann mit \textit{\#contains(Object, Object)} überprüft werden. Die Laufzeit verringert sich dadurch von anfänglich mehreren Sekunden auf wenige Millisekunden. Um unnötigen Rechenaufwand zu vermeiden, wird die Struktur nur einmal aktualisiert, sobald sich die selektierten Werte verändert haben. Ein weiterer Vorteil ist, dass die Erzeugung von vielen Objekten des Typs \textit{Pair} wegfällt.
 
 \textbf{Quellcode-Usability}
 
-Um das erste in Kapitel 4.3 dargestellte Usability-Problem zu lösen, kann zum Beispiel die Anonyme Innere Klasse extrahiert werden und als eigenständige Klasse in einer eigenen Datei implementiert werden. Dadurch fiele außerdem der Instance Initializer weg, dessen Code stattdessen im Konstruktor ausgeführt werden kann. Referenzen in den übergeordneten Scope werden dem Konstruktoraufruf als Parameter übergeben.
+Um das erste in Kapitel \ref{sec:quellcodeUsability} dargestellte \gls{usability}-Problem zu lösen, kann zum Beispiel die Anonyme Innere Klasse extrahiert werden und als eigenständige Klasse in einer eigenen Datei implementiert werden. Dadurch fiele außerdem der Instance Initializer weg, dessen Code stattdessen im Konstruktor ausgeführt werden kann. Referenzen in den übergeordneten Scope werden dem Konstruktoraufruf als Parameter übergeben.
 
-Das zweite Problem erübrigt sich, wenn auf den Lambda-Ausdruck verzichtet und stattdessen eine Anonyme Innere Klasse implementiert werden würde.
+Das zweite Problem erübrigt sich, wenn auf den \gls{lambda} verzichtet und stattdessen eine Anonyme Innere Klasse implementiert werden würde.
 
-Das Problem der Quellcode-Usability ist jedoch ein grundlegenderes. Zur Lösung müssen Richtlinien festgelegt werden, wann, in welchem Maße und in welchen Kombinationen Lambdas und andere Sprachfeatures verwendet werden dürfen.
+Das Problem der Quellcode-\gls{usability} ist jedoch ein grundlegenderes. Zur Lösung müssen Richtlinien festgelegt werden, wann, in welchem Maße und in welchen Kombinationen Lambdas und andere Sprachfeatures verwendet werden dürfen.
 
 Einige mögliche Richtlinien sind zum Beispiel folgende:
 
 \begin{itemize}
-	\item Keine Anonymen Inneren Klassen innerhalb von Lambdaausdrücken verwenden
+	\item Keine Anonymen Inneren Klassen innerhalb von \glspl{lambda}n verwenden
 	\item Lambdas in maximal 2 bis 3 Ebenen schachteln
 	\item Bei Schachtelung von Lambdas stets durch Einrückungen kennzeichnen
-	\item DoubleColon-Operator nur in selbsterklärenden Fällen
+	\item DoubleColon-Operator nur in selbsterklärenden Fällen verwenden
+	\item Parameter in \glspl{lambda}n nach Typ sprechend bezeichnen
 \end{itemize}
 
 Die Liste ist weit entfernt davon, komplett zu sein, aber vermittelt dennoch einen kurzen Eindruck, wie Lese- und Verständnisschwierigkeiten im Quellcode vermieden werden können.

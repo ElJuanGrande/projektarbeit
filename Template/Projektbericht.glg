@@ -1,0 +1,7 @@
+This is makeindex, version 2.15 [TeX Live 2015] (kpathsea + Thai support).
+Scanning style file ./Projektbericht.ist.............................done (29 attributes redefined, 0 ignored).
+Scanning input file Projektbericht.glo....done (265 entries accepted, 0 rejected).
+Sorting entries.....done (2430 comparisons).
+Generating output file Projektbericht.gls....done (120 lines written, 0 warnings).
+Output written in Projektbericht.gls.
+Transcript written in Projektbericht.glg.
