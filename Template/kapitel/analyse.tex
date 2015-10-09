@@ -1,5 +1,7 @@
 \chapter{Analyse ausgewählter Usability-Probleme}
-\section{Situation} \label{sec:analyseSituation}
+\section{Präsentation 2-teiliger Texte in ListCells} \label{sec:analyseListCells}
+\textbf{Situation}
+
 In einer Liste werden Texte angezeigt, die aus zwei Teilen bestehen. In einem Fall ist der erste Teil ein Schlüssel zur Identifizierung eines Fahrzeuges, der zweite Teil ist der Name des Fahrzeuges. Ein Fahrzeugname kann unter Umständen mehr als einmal auftreten, der Fahrzeugschlüssel hingegen ist eindeutig. Während die Schlüssel sich in der Zeichenanzahl nur um zwei bis drei Zeichen unterscheiden, können die Fahrzeugnamen ganz unterschiedliche Längen haben. Derzeit werden die beiden Textbausteine schlicht aneinandergereiht. Dies führt bei längeren Listen schnell zu Unübersichtlichkeit. Daher sollte eine sichtbare Trennung zwischen den beiden Elementen erfolgen.
 
 \begin{figure}[H]
@@ -61,8 +63,8 @@ Diese Lösung dieses Problems alleine brachte jedoch nicht den gewünschten Effe
 \end{lstlisting}
 
 Als Parameter erhält die Methode ein Attribut und einen Wert, der überprüft werden soll. Die aufgerufene benutzt die \textit{\#contains(Object)}-Methode der List-Implementierung. Dafür muss für jede Überprüfung ein Objekt vom Typ \textit{Pair} erzeugt werden, das das Attribut und den zu überprüfenden Wert kapselt. Zudem muss danach (durch die Implementierung von \textit{\#contains(Object))} jedes Objekt der Liste durchlaufen werden und per \textit{\#equals(Object)} verglichen werden. Je größer die Menge der ausgewählten Werte wird, desto öfter muss ein solcher Vergleich ausgeführt werden. Die Laufzeit eines Durchlaufes über diese Datenstruktur $O(n)$. Bei einzelnen Aufrufen würde dies nicht weiter problematisch werden, doch durch den neuartigen Filter wird diese Methode nun weitaus häufiger ausgeführt.
-\section{Quellcode-Usability} \label{sec:quellcodeUsability}
-Die Java 8 -Sprachfeatures sind ein gutes Mittel, vor Allem in Kombination mit \gls{javafx} und der \gls{streamAPI}, Code prägnant und sehr kurz darzustellen. Doch haben die neuen Features, vornehmlich Lambdas auch die Eigenschaft, Code schnell zu verkomplizieren, wenn sie im Überfluss verwendet werden. Der durch die Definition bestimmte Nachteil eines \gls{lambda}es ist, dass nicht sofort erkennbar ist, welches Interface implementiert wird und was die Parameter zu bedeuten haben. Dies lässt nicht nur ungeübte Java 8 –Programmierer an einigen Codestellen verzweifeln. Ein Konstrukt, das im Quellcode in einer noch ausgeprägteren Variante zu finden war, wird folgend umrissen.
+\section{\enquote{Quellcode-Usability}} \label{sec:quellcodeUsability}
+Die Java 8 - Sprachfeatures sind ein gutes Mittel, vor Allem in Kombination mit \gls{javafx} und der \gls{streamAPI}, Code prägnant und sehr kurz darzustellen. Doch haben die neuen Features, vornehmlich Lambdas auch die Eigenschaft, Code schnell zu verkomplizieren, wenn sie im Überfluss verwendet werden. Der durch die Definition bestimmte Nachteil eines \gls{lambda}es ist, dass nicht sofort erkennbar ist, welches Interface implementiert wird und was die Parameter zu bedeuten haben. Dies lässt nicht nur ungeübte Java 8 –Programmierer an einigen Codestellen verzweifeln. Ein Konstrukt, das im Quellcode in einer noch ausgeprägteren Variante zu finden war, wird folgend umrissen.
 
 \begin{lstlisting}[
     language=Java,
@@ -102,7 +104,7 @@ Ein weiteres Beispiel hängt mit der Verwendung des Double-Colon-Operators zusam
 	protected final IListEntry specialEntry = specialTextProperty::get;
 \end{lstlisting}
 
-Auch über diesen sehr kurzen Code-Ausschnitt kann sich schnell der Kopf zerbrochen werden. Ein \gls{javafx} StringProperty hat nur die Funktion, einen String-Wert zu kapseln und den Zugriff darauf zu erlauben - über die Funktion \textit{\#get()} und \textit{\#set(String)}. Warum ist der obenstehende Code nicht fehlerhaft? Liefert \textit{\#get()} in diesem Falle doch keinen String zurück?
+Auch über diesen kurzen Code-Ausschnitt kann sich schnell der Kopf zerbrochen werden. Ein \gls{javafx} StringProperty hat nur die Funktion, einen String-Wert zu kapseln und den Zugriff darauf zu erlauben - über die Funktion \textit{\#get()} und \textit{\#set(String)}. Warum ist der obenstehende Code nicht fehlerhaft? Liefert \textit{\#get()} in diesem Falle doch keinen String zurück?
 Es sieht in der Tat für ungeübte Java 8 -Entwickler so aus, als würde der Variable \textit{specialEntry} ein String zugewiesen werden. Doch hier handelt es sich um die Kurzschreibweise eines \gls{lambda}es. Die betroffene Zeile würde wie folgt in einen \enquote{echten} Lambda übersetzt werden:
 
 \begin{lstlisting}[

@@ -1,15 +1,14 @@
-
 \chapter{Grundlagen}
 \section{Besonderheiten in Java 8} \label{sec:grundJava8}
-Mit JavaSE 8 führt Oracle einige interessante Neuerungen in die weit verbreitete Programmiersprache Java ein \cite[S. 35]{Ullenboom2014}. Die für dieses Projekt wichtigen Änderungen werde ich folgend darlegen.
+Mit JavaSE 8 führt Oracle interessante Neuerungen in die weit verbreitete Programmiersprache Java ein \cite[S. 35]{Ullenboom2014}. Die für dieses Projekt wichtigen Änderungen werden im Folgenden dargelegt.
 \subsection{Default Implementierungen} \label{sec:javaDefault}
-Eine kleinere, aber dennoch einflussreiche Veränderung sind \gls{defaultImpl}en für Interfaces. Das bedeutet, es können in Interfaces Methoden-Bodies ausprogrammiert werden. Wenn eine Klasse ein solches Interface implementiert, müssen die Default-Methoden des Interfaces von der implementierenden Klasse nicht überschrieben werden. Eine solche Methode wird mit dem Schlüsselwort \textit{default} gekennzeichnet. \cite[S. 45f.]{Ullenboom2014}
+Eine kleine, aber dennoch einflussreiche Veränderung sind \gls{defaultImpl}en für Interfaces. Dies bedeutet, dass in Interfaces Methodenkörper ausprogrammiert werden können. Wenn eine Klasse ein solches Interface implementiert, müssen die Default-Methoden des Interfaces von der implementierenden Klasse nicht überschrieben werden. Eine solche Methode wird mit dem Schlüsselwort \textit{default} gekennzeichnet. \cite[S. 45f.]{Ullenboom2014}
 
 Erwähnenswert ist außerdem, dass nun auch statische Methoden in Interfaces implementiert werden können. \cite[S. 48f.]{Ullenboom2014}
 
 Durch die Einführung von Default-Methoden können Programmierschnittstellen auf eine neue Weise definiert werden. Außerdem wird das Konstrukt der \gls{functionalInterface}s ermöglicht bzw. verbessert.
 \subsection{Functional Interfaces} \label{sec:javaFunctional}
-\gls{functionalInterface}s sind ein neues Konstrukt der Java-Sprachdefinition. Ein \gls{functionalInterface} definiert sich dadurch, dass bei einem Interface nur genau eine Methode durch die implementierende Klasse überschrieben und ausprogrammiert werden muss. Also genau eine abstrakte Methode vorhanden ist. \gls{functionalInterface}s alleine haben keine besondere Bedeutung, sind jedoch Voraussetzung für ein anderes, mächtiges Sprachwerkzeug in JavaSE 8 – den \glspl{lambda}n. Ein oft verwendetes Beispiel für ein \gls{functionalInterface} ist das \textit{Consumer}-Interface. \cite[S. 63f.]{Ullenboom2014}
+\gls{functionalInterface}s sind ein neues Konstrukt der Java-Sprachdefinition. Ein \gls{functionalInterface} definiert sich dadurch, dass bei einem Interface nur genau eine Methode durch die implementierende Klasse überschrieben und ausprogrammiert werden muss - also genau eine abstrakte Methode vorhanden ist. \gls{functionalInterface}s alleine haben keine besondere Bedeutung, sind jedoch Voraussetzung für ein anderes, mächtiges Sprachwerkzeug in JavaSE 8 – die \glspl{lambda}. Ein oft verwendetes Beispiel für ein \gls{functionalInterface} ist das \textit{Consumer}-Interface. \cite[S. 63f.]{Ullenboom2014}
 \subsection{Stream API} \label{sec:javaStream}
 Die \gls{streamAPI} ist kein neues Sprachfeature der Java Version 8, aber eine umfangreiche Programmierschnittstelle. Sie bietet Methoden, die auf sogenannten \gls{stream}s arbeiten. Diese machen es möglich, implizit über Datenstrukturen zu iterieren, ohne dafür ein Schleifenkonstrukt (explizite Iteration) ausprogrammieren zu müssen. \gls{stream}s sind mithilfe von Generics typisiert, sodass immer klar ist, auf welcher Art von Daten gearbeitet wird. \cite[S. 391f.]{Ullenboom2014}
 
@@ -21,11 +20,11 @@ Ein \gls{stream} kann aus einer beliebigen Java-Collection erzeugt werden, wie z
 
 Die Besonderheit der Intermediate Operations ist, dass diese zu einer Pipeline zusammengeschlossen werden können. Das heißt, jede Intermediate Operation liefert wieder einen \gls{stream} zurück, auf der weitere Intermediate Operations oder eine Terminal Operation ausgeführt werden können. Dieser Typ der Operationen dient dem Zweck, den \gls{stream} zu manipulieren, sodass die Terminal Operation das gewünschte Ergebnis zurückliefern kann bzw. die nötigen Daten als Input bekommt. Die \gls{streamAPI} stellt dafür verschiedene Methoden bereit, mit denen man die Daten des \gls{stream}s z.B. filtern, sortieren, reduzieren oder zusammenfassen kann. Auch das Konvertieren eines \gls{stream}s in einen \gls{stream} eines anderen Typs ist möglich. \cite{Urma2014}
 
-Eine Terminal Operation beendet die Pipeline und liefert ggf. ein Ergebnis zurück. Es ist nicht zwingend notwendig, dass die Terminal Operation einen Wert zurückgibt, die Methode kann genauso gut mit dem Schlüsselwort void versehen sein. Es ist demnach jede Operation eine Terminal Operation, die keinen \gls{stream} zurückliefert. \cite{Urma2014}
+Eine Terminal Operation beendet die Pipeline und liefert ggf. ein Ergebnis zurück. Es ist nicht zwingend notwendig, dass die Terminal Operation einen Wert zurückgibt. Die Methode kann genauso gut mit dem Schlüsselwort void versehen sein. Es ist demnach jede Operation eine Terminal Operation, die keinen \gls{stream} zurückliefert. \cite{Urma2014}
 
 Die neue Schnittstelle bietet außerdem eine einfache Möglichkeit zur Erzeugung von Parallel\gls{stream}s, die ohne weiteren Programmieraufwand bestimmte Operationen auf den Quelldaten quasi-gleichzeitig (in mehreren Threads) ausführen. \cite{Urma2014}
 
-Es folgt ein Beispiel für die Verwendung von \gls{stream}s, das zudem verdeutlicht, dass diese sehr gut mit \glspl{lambda}n synergieren, die im nächsten Abschnitt genauer beleuchtet werden.
+Es folgt ein Beispiel für die Verwendung von \gls{stream}s. Es verdeutlicht zudem, dass diese sehr gut mit \glspl{lambda}n synergieren, die im nächsten Abschnitt genauer beleuchtet werden.
 
 \begin{lstlisting}[
     language=Java,
@@ -63,6 +62,7 @@ Es folgt ein Beispiel für die Verwendung von \gls{stream}s, das zudem verdeutli
 
 Ein \gls{lambda} erscheint in zwei bzw. drei verschiedenen Ausprägungen.
 
+\needspace{4\baselineskip}
 \textbf{Ausprägung 1: Der \enquote{normale} \gls{lambda}}
 
 \enquote{Normale} Lambdas werden beschrieben, indem die Bezeichner der Methodenparameter der zu implementierenden Methode in runden Klammern und durch Komma getrennt definiert werden. Den Parametern folgt ein Pfeil \enquote{\textit{->}} und daraufhin der Methodenkörper in geschwungenen Klammern. Ist nur ein Parameter zu bezeichnen, können die runden Klammern weggelassen werden. Wenn der Methoden-Body nur eine Anweisung umfasst, können die geschwungenen Klammern weggelassen werden. Wenn die einzelne Anweisung eine Return-Anweisung mit einem darauffolgenden Wert ist, wird das Schlüsselwort \textit{return} ebenfalls weggelassen. \cite{OracleLambda}
@@ -80,7 +80,7 @@ Ein \gls{lambda} erscheint in zwei bzw. drei verschiedenen Ausprägungen.
 
 \begin{lstlisting}[
     language=Java,
-    caption=Anonyme Innere Klasse ohne Lambda,
+    caption=Anonyme Innere Klasse mit Lambda,
     label=code4]
 	Consumer<Integer> consumer = (i) -> {
 		System.out.println(i);
@@ -94,6 +94,7 @@ Ein \gls{lambda} erscheint in zwei bzw. drei verschiedenen Ausprägungen.
 	Consumer<Integer> consumer = i -> System.out.println(i);	
 \end{lstlisting}  
 
+\needspace{4\baselineskip}
 \textbf{Ausprägung 2: Die Methodenreferenz}
 
 Mit der Methodenreferenz wird ein weiterer Operator eingeführt, der Double-Colon-Operator \enquote{\textit{::}}. Unter Verwendung dieser Zeichenkette kann, anstatt eine Anonyme Innere Klasse auszuprogrammieren, eine Methode referenziert werden, welche die gleiche Signatur wie die eigentlich zu implementierende Methode des funktionalen Interfaces hat. \cite[S. 81f.]{Ullenboom2014}
@@ -114,12 +115,11 @@ Mit der Methodenreferenz wird ein weiterer Operator eingeführt, der Double-Colo
 	List<Integer> stringLengths = list.stream().map(String::length).collect(Collectors.toList());
 \end{lstlisting}  
 
-
 Auf die gleiche Weise können statische Methoden sowie Methoden von lokalen Variablen referenziert werden.
 
 \textbf{Ausprägung 3: Die Konstruktorreferenz}
 
-Eine eher untypische Variante der Methodenreferenz ist die Konstruktorreferenz. Sie funktioniert analog zur Methodenreferenz. \cite[S. 83f.]{Ullenboom2014}
+Eine eher untypische Variante ist die Konstruktorreferenz. Sie funktioniert analog zur Methodenreferenz. \cite[S. 83f.]{Ullenboom2014}
 
 \begin{lstlisting}[
     language=Java,
@@ -131,6 +131,7 @@ Eine eher untypische Variante der Methodenreferenz ist die Konstruktorreferenz. 
 In diesem Fall wird der Konstruktor \textit{new Integer(String s)} verwendet, der versucht, den String zu parsen und in einem Integer zu verpacken.
 Zu beachten ist, dass Lambdas keinen neuen Scope für Variablen definieren. Gibt es also in einer Methode eine lokale Variable \textit{x}, darf ein Methodenparameter eines Lambdas, der in dieser Methode definiert wird, nicht ebenfalls \textit{x} heißen. \cite{OracleLambda}
 
+\needspace{4\baselineskip}
 \begin{lstlisting}[
     language=Java,
     caption=Lambda-Scope \cite{OracleLambda},
@@ -140,11 +141,11 @@ Zu beachten ist, dass Lambdas keinen neuen Scope für Variablen definieren. Gibt
 \end{lstlisting}
 
 \section{JavaFX} \label{sec:grundJavaFX}
-Bei JavaFX handelt es sich um ein relativ neues \gls{gui}-Framework. Die erste Release-Version (\gls{javafx} 8) wurde zusammen mit Java 8 ausgeliefert. \gls{javafx} wurde entwickelt, um das bewährte, aber dennoch veraltete \gls{gui}-Framework Swing abzulösen und watet mit modernen Features auf. \cite{Mueller2015}
+Bei JavaFX handelt es sich um ein relativ neues \gls{gui}-Framework. Die letzte Release-Version (\gls{javafx} 8) wurde zusammen mit Java 8 ausgeliefert. \gls{javafx} wurde entwickelt, um das bewährte, aber dennoch veraltete \gls{gui}-Framework Swing abzulösen und wartet mit modernen Features auf. \cite{Mueller2015}
 
 \textbf{Deklarative GUI-Definition}
 
-Die Benutzeroberfläche kann sowohl im Java-Code als auch in einer gesonderten FXML-Datei (XML-Syntax) definiert werden. Auch eine Kombination beider Möglichkeiten ist problemlos möglich, da man sich durch spezielle Annotationen in den Java-Klassen die \gls{gui}-Komponenten aus den FXML-Dateien anhand einer ID injizieren lassen kann. Dazu ist nur die Annotation @FXML an einer gleichnamigen Membervariable des gleichen Komponententyps von Nöten.
+Die Benutzeroberfläche kann sowohl im Java-Code als auch in einer gesonderten FXML-Datei (XML-Syntax) definiert werden. Auch eine Kombination beider Möglichkeiten ist unproblematisch, da man sich durch spezielle Annotationen in den Java-Klassen die \gls{gui}-Komponenten aus den FXML-Dateien anhand einer ID injizieren lassen kann. Dazu ist nur die Annotation @FXML an einer gleichnamigen Membervariable des gleichen Komponententyps von Nöten.
 
 \textbf{Styling per CSS}
 
@@ -158,24 +159,26 @@ Das Aussehen nahezu aller Komponenten kann durch wiederverwendbare \gls{css}-Kla
 
 Mit \gls{javafx} wurden Properties an UI-Komponenten eingeführt, die auf einfache Weise an andere Werte gebunden werden können. Verändert man den Wert eines \gls{binding}s, werden alle Observer (gebundene Werte) ebenfalls verändert. \cite{Mueller2015} Solche \glspl{property} (\gls{observable}s) können auch selbst definiert und für andere Zwecke verwendet werden. Sie existieren in verschiedenen Ausprägungen mit unterschiedlicher Typisierung. \cite{OracleBindings}
 
+\needspace{4\baselineskip}
 \textbf{Die Anwendung}
 
 Die Anwendung, die im Rahmen dieser Ausarbeitung analysiert und erweitert wird, nennt sich \gls{falkofx}. Sie entstand aus einem Kundenprojekt (\gls{falko}) eines Automobilherstellers und dient der Anzeige von länderspezifischen Produktionsfreigaben für verschiedene Ausprägungen von Fahrzeugmodellen.
 
 Das Projekt \gls{falko} wird neben \gls{falkofx} weiterentwickelt. Während \gls{falkofx} für einen einfachen, möglichst benutzerfreundlichen (lesenden) Zugriff auf die Daten sorgt, bietet der weit komplexere \gls{falko}-Client noch vielfältigere Möglichkeiten zum Anlegen, Manipulieren und Pflegen der Daten an. Da die Übersichtlichkeit des \gls{falkofx}-Clients gewährleistet bleiben soll und das Programm einen eingeschränkteren Benutzerkreis als das Ausgangsprojekt hat, bietet es dementsprechend weniger Funktionalitäten.
 \section{Die Anwendung} \label{sec:grundAnwendung}
-Derzeit sind 2 von 3 der für das Release der Software vorgesehenen Anwendungsfälle implementiert. Der dritte Anwendungsfall kommt im Rahmen dieser Arbeit hinzu. Der grobe Aufbau eines jeden, derzeit beauftragten, Anwendungsfalles ist folgender:
+Derzeit sind zwei von drei der für das Release der Software vorgesehenen Anwendungsfälle implementiert. Der dritte Anwendungsfall kommt im Rahmen dieser Arbeit hinzu. Der grobe Aufbau eines jeden, derzeit beauftragten, Anwendungsfalles ist folgender:
 \begin{enumerate}
-	\item Der Nutzer wechselt zu besagtem Anwendungsfall
+	\item Der Nutzer wechselt zu einem Anwendungsfall
 	\item Es öffnet sich ein Bildschirm, in dem der Nutzer die Eigenschaften einstellt, nach denen die \gls{rohdaten} gefiltert werden sollen.
 	\item Der Nutzer wechselt zu einer Ergebnisansicht
 	\item Die Daten werden in der gewählten Ansicht dargestellt
 \end{enumerate}
 
-Die getroffene Filterauswahl kann in der Sidebar an der rechten Seite nachvollzogen und bearbeitet werden. Die im Filter auswählbaren Werte sind nach \gls{attribut}en sortiert. Ein \gls{attribut} kann z.B. „Ländername“ und die dazugehörigen Werte „Deutschland, Kanada, Schweiz, ...“ lauten. Der \gls{filter} wird in einem späteren Abschnitt (Link) noch genauer erläutert.
+Die getroffene Filterauswahl kann in der Sidebar an der rechten Seite nachvollzogen und bearbeitet werden. Die im Filter auswählbaren Werte sind nach \gls{attribut}en sortiert. Ein \gls{attribut} kann z.B. \enquote{Ländername} und die dazugehörigen Werte \enquote{Deutschland, Kanada, Schweiz, ...} lauten. Der \gls{filter} wird in einem späteren Abschnitt (\ref{sec:implFilter}) noch genauer erläutert.
 
-In jedem Anwendungsfall sind verschiedene Aktionen und Exportmöglichkeiten verfügbar, die aber für diese Ausarbeitung nicht zwangsläufig relevant sind.
+In jedem Anwendungsfall sind verschiedene Aktionen und Exportmöglichkeiten verfügbar, die allerdings für diese Ausarbeitung nicht zwangsläufig relevant sind.
 
+\needspace{4\baselineskip}
 \textbf{Anwendungsfall 1}
 
 Der erste Anwendungsfall bezieht sich auf die Anzeige von Länderdaten. Nachdem nach bestimmten Eigenschaften, die ein Land potenziell haben kann, gefiltert wurde, kann das Ergebnis in einer tabellarischen Ansicht oder der \gls{gallery} betrachtet werden.
@@ -184,35 +187,36 @@ Die \gls{gallery} ist eine selbstentwickelte Komponente, die im oberen Bereich I
 
 \textbf{Anwendungsfall 2}
 
-Der zweite Anwendungsfall ist dem ersten sehr ähnlich. Jedoch geht es hier um die Anzeige von technischen Daten einer großen Anzahl an Fahrzeugen. Bereits im Filter gibt es kleine Unterschiede, die ich später erläutern werde. Die \gls{gallery}, die in Anwendungsfall 1 benutzt wurde, entfällt für dieses Szenario, da sie nicht praktikabel wäre.
+Der zweite Anwendungsfall ist dem ersten sehr ähnlich. Jedoch geht es hier um die Anzeige von technischen Daten einer großen Anzahl an Fahrzeugen. Bereits im Filter gibt es kleine Unterschiede, die später erläutert werden. Die \gls{gallery}, die in Anwendungsfall 1 benutzt wurde, entfällt für dieses Szenario, da sie nicht praktikabel wäre.
 
 \textbf{Anwendungsfall 3}
 
-Die grobe Funktionalität des dritten Anwendungsfalles ist ein Teil dieser Projektarbeit. Der Nutzer will in diesem Bereich der Anwendung Produktionsfreigaben für Fahrzeugmodelle einsehen können. Diese Freigaben sind länderabhängig und können unterschiedlich ausfallen. Die wichtigste Information dieser Freigaben sind ein Datum, das den Start der Produktion festlegt und eines, welches das Ende bestimmt.
+Die grundlegende Funktionalität des dritten Anwendungsfalles ist ein Teil dieser Projektarbeit. Der Nutzer will in diesem Bereich der Anwendung Produktionsfreigaben für Fahrzeugmodelle einsehen können. Diese Freigaben sind länderabhängig und können unterschiedlich ausfallen. Die wichtigste Information dieser Freigaben sind ein Datum, das den Start der Produktion festlegt und eines, welches das Ende bestimmt.
 
 Um in die Ergebnisansicht dieses Szenarios zu gelangen, muss der \gls{filter} sowohl für Länder als auch für Fahrzeuge konfiguriert werden. Für die Kombination der beiden \gls{ergebnismenge}n werden daraufhin die Produktionsfreigaben angezeigt.
 \section{Codedesign-Patterns} \label{sec:grundPattern}
 \subsection{MVC-Pattern} \label{sec:patternMVC}
 Das \gls{mvc} hilft dabei, den Quellcode zu strukturieren und übersichtlicher zu gestalten. Durch die Anwendung des Entwurfsmusters können Programme in Bereiche mit unterschiedlichen Zuständigkeiten eingeteilt werden. MVC steht für Model-View-Controller. In diese drei entsprechenden Bereiche kann der Code untergliedert werden. \cite[S. 529ff.]{Freeman2006}
 
+\needspace{4\baselineskip}
 \textbf{Das Model}
 
-Das Model enthält die Datenstrukturen, die für die Verarbeitung benötigt werden und die später angezeigt werden. Der Controller kann die Daten bzw. den Zustand des Models verändern. \cite[S. 529ff.]{Freeman2006}
+Das Model enthält die Datenstrukturen, die für die Verarbeitung benötigt und später angezeigt werden. \cite[S. 529ff.]{Freeman2006}
 
 \textbf{Die View}
 
-Dieser Bereich entspricht der Benutzeroberfläche, mit der ein Anwender interagieren kann. Es werden auf Basis des Models Daten oder Informationen visualisiert. Die View interagiert mit dem Controller um auf Aktionen des Nutzers zu reagieren. \cite[S. 529ff.]{Freeman2006}
+Dieser Bereich entspricht der Benutzeroberfläche, mit der ein Anwender interagieren kann. Es werden auf Basis des Models Daten oder Informationen visualisiert. \cite[S. 529ff.]{Freeman2006}
 
 \textbf{Der Controller}
 
-Der Controller ist die Schnittstelle zwischen Model und View. Er verarbeitet eingegebene Informationen aus der View und manipuliert das Model nach Interpretation dieser. \cite[S. 529ff.]{Freeman2006}
+Der Controller ist die Schnittstelle zwischen Model und View. Er verarbeitet eingegebene Informationen aus der View und manipuliert das Model nach Interpretation dieser. Außerdem kann er die Daten bzw. den Zustand des Models verändern. Der Controller enthält die gesamte Anwendungslogik und modifiziert das Verhalten der View gemäß dem aktuellen Zustand der Applikation. \cite[S. 529ff.]{Freeman2006}
 
 \textbf{Die Anwendung in FalkoFX}
 
 Auf Codeebene kann das \gls{mvc} durch verschiedene andere \gls{pattern}s realisiert werden.
-Um die Änderungen des Models zu publizieren und andere Teile der Anwendung zu benachrichtigen, besteht die Möglichkeit, das Observer-Pattern zu verwenden. Genau dies bietet auch \gls{javafx} an. Hier gibt es das \textit{Observable}-Interface, das es erlaubt, Listener an einer Instanz der implementierenden Klasse zu registrieren, die bei einer Änderung benachrichtigt werden und darauf reagieren können.
+Um die Änderungen des Models zu publizieren und andere Teile der Anwendung zu benachrichtigen, besteht die Möglichkeit, das Observer-Pattern zu verwenden. Genau dies bietet auch \gls{javafx} an. Hier gibt es das \textit{Observable}-Interface, welches es erlaubt, Listener an einer Instanz der implementierenden Klasse zu registrieren, die bei einer Änderung benachrichtigt werden und darauf reagieren können.
 
-In der View wird durch \gls{javafx} das Composite-Pattern angewandt. \enquote{\textit{Die Anzeige besteht aus ineinander verschachtelten Fenstern, Panels, Buttons, Textlabels und so weiter}} \cite[S. 532]{Freeman2006}. Mehr als das, sind in \gls{javafx} die Komponenten intern in einer Baumstruktur angeordnet, dem sogenannten Szenegraphen, was die Verschachtelung gut zeigt.
+In der View wird durch \gls{javafx} das Composite-Pattern angewandt. \enquote{\textit{Die Anzeige besteht aus ineinander verschachtelten Fenstern, Panels, Buttons, Textlabels und so weiter}} \cite[S. 532]{Freeman2006}. In \gls{javafx} sind die Komponenten intern in einer Baumstruktur angeordnet, dem sogenannten Szenegraphen, was die Verschachtelung gut zeigt.
 
 Im Controller kommt zusammen mit der View das Strategy-Pattern zum Einsatz. Die View selbst kümmert sich nur darum, wie die Darstellung aufgebaut ist. Sie wird mit einer Strategie konfiguriert, die von dem Controller bereitgestellt wird. Die View selbst implementiert keine Programmlogik.
 
@@ -220,15 +224,16 @@ Die Patterns werden in FalkoFX zwar durchgängig verwendet, die Trennung in vers
 \subsection{Command-Pattern} \label{sec:patternCommand}
 Das \gls{commandPattern} beschreibt ein Entwurfsmuster der Softwarearchitektur, bei dem Funktionsaufrufe und Berechnungen in einem Kommando-Objekt gekapselt werden. Die Anweisungen können ausgeführt werden, ohne dass das ausführende Objekt Kenntnis von dem aufrufenden Objekt hat. \cite{Command}
 
-Durch die Verwendung von Kommandos können diese nach der Erstellung zu einem beliebigen Zeitpunkt ausgeführt werden, sie können in einer Rangfolge angeordnet werden und sie können Informationen zum Rücknahme enthalten. Außerdem lassen sich die Kommando-Objekte durch Parameter in unterschiedlichen Ausprägungen erzeugen. [Zel00]
+Durch die Verwendung von Kommandos können diese nach der Erstellung zu einem beliebigen Zeitpunkt ausgeführt werden. sie können in einer Rangfolge angeordnet werden und sie können Informationen zur Rücknahme (\textit{Undo}-Operation) enthalten. Außerdem lassen sich die Kommando-Objekte durch Parameter in unterschiedlichen Ausprägungen erzeugen. [Zel00]
 
 Eine abstrakte \textit{Kommando}-Klasse gibt die Struktur vor. Dies ist mindestens eine \textit{\#execute()}-Methode. Diese wird in einer konkreten Implementierung des Kommandos spezifiziert. \cite{Command}
 Das konkrete Kommando wird durch den Client erzeugt und enthält Informationen über den Zustand und das Verhalten. Der Client setzt ebenfalls den Receiver im Kommando-Objekt. Der Receiver stellt Methoden-Implementierungen für das Kommando bereit, auf die das Kommando in seiner \textit{\#execute()}-Methode verweist. Bei jeder Erzeugung kann ein anderer Receiver gesetzt werden, der je eine andere Implementierung der Funktionen bereitstellt und so das Verhalten anders definiert. Zum Schluss wird das Kommando an einen Invoker übergeben, der es zu einem beliebigen (definierten) Zeitpunkt ausführen kann. \cite{Command}
 
 \section{Gestaltungsgrundlagen} \label{sec:grundGestalt}
 \subsection{Gestaltgesetze} \label{sec:gestaltGesetze}
-Die Gestaltgesetze basieren auf Forschungen der Gestaltpsychologie. Es sind allgemein gültige Regelungen, die auf alle Bereiche der Wahrnehmung zutreffen.
+Die Gestaltgesetze basieren auf Forschungen der Gestaltpsychologie. Es sind allgemein gültige Regelungen, die auf alle Bereiche der Wahrnehmung zutreffen. Folgend werden die für diese Arbeit relevanten Gesetze beschrieben.
 
+\needspace{4\baselineskip}
 \textbf{Gesetz der Nähe}
 
 \begin{quote}

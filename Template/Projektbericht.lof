@@ -4,27 +4,27 @@
 \contentsline {figure}{\numberline {\relax 2.1}{\ignorespaces Gesetz der N\IeC {\"a}he \cite {Schossmann}\relax }}{13}{figure.caption.6}
 \contentsline {figure}{\numberline {\relax 2.2}{\ignorespaces Gesetz der \IeC {\"A}hnlichkeit \cite {Grigo}\relax }}{13}{figure.caption.7}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 3.1}{\ignorespaces Vereinigungsmenge Filter\relax }}{15}{figure.caption.8}
-\contentsline {figure}{\numberline {\relax 3.2}{\ignorespaces Teilmenge 1 - Exklusivfilter\relax }}{16}{figure.caption.9}
-\contentsline {figure}{\numberline {\relax 3.3}{\ignorespaces Teilmenge 2 - Exklusivfilter\relax }}{16}{figure.caption.10}
-\contentsline {figure}{\numberline {\relax 3.4}{\ignorespaces Schnittmenge - Exklusivfilter\relax }}{17}{figure.caption.11}
-\contentsline {figure}{\numberline {\relax 3.5}{\ignorespaces Klassendiagramm DataProvider\relax }}{20}{figure.caption.12}
-\contentsline {figure}{\numberline {\relax 3.6}{\ignorespaces Klassenaufbau - Filter\relax }}{24}{figure.caption.13}
-\contentsline {figure}{\numberline {\relax 3.7}{\ignorespaces Klassendiagramm - Konzept Filter\relax }}{26}{figure.caption.14}
-\contentsline {figure}{\numberline {\relax 3.8}{\ignorespaces Schema FilterElement-Aufbau\relax }}{28}{figure.caption.15}
-\contentsline {figure}{\numberline {\relax 3.9}{\ignorespaces Kartesisches Produkt\relax }}{29}{figure.caption.16}
-\contentsline {figure}{\numberline {\relax 3.10}{\ignorespaces Vergleich: Schr\IeC {\"a}ge Spaltenk\IeC {\"o}pfe - Normale Tabelle\relax }}{30}{figure.caption.17}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Schr\IeC {\"a}ge Spaltenk\IeC {\"o}pfe}}}{30}{subfigure.10.1}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Normale Tabelle}}}{30}{subfigure.10.2}
-\contentsline {figure}{\numberline {\relax 3.11}{\ignorespaces Schr\IeC {\"a}ge Spaltenk\IeC {\"o}pfe mit Gruppierung\relax }}{31}{figure.caption.18}
-\contentsline {figure}{\numberline {\relax 3.12}{\ignorespaces Design Ergebnistabelle\relax }}{32}{figure.caption.19}
-\contentsline {figure}{\numberline {\relax 3.13}{\ignorespaces Klassendiagramm Ergebnisansicht\relax }}{34}{figure.caption.20}
+\contentsline {figure}{\numberline {\relax 3.1}{\ignorespaces Vereinigungsmenge Filter\relax }}{16}{figure.caption.8}
+\contentsline {figure}{\numberline {\relax 3.2}{\ignorespaces Teilmenge 1 - Exklusivfilter\relax }}{17}{figure.caption.9}
+\contentsline {figure}{\numberline {\relax 3.3}{\ignorespaces Teilmenge 2 - Exklusivfilter\relax }}{17}{figure.caption.10}
+\contentsline {figure}{\numberline {\relax 3.4}{\ignorespaces Schnittmenge - Exklusivfilter\relax }}{18}{figure.caption.11}
+\contentsline {figure}{\numberline {\relax 3.5}{\ignorespaces Klassendiagramm DataProvider\relax }}{21}{figure.caption.12}
+\contentsline {figure}{\numberline {\relax 3.6}{\ignorespaces Klassenaufbau - Filter\relax }}{25}{figure.caption.13}
+\contentsline {figure}{\numberline {\relax 3.7}{\ignorespaces Klassendiagramm - Konzept Filter\relax }}{27}{figure.caption.14}
+\contentsline {figure}{\numberline {\relax 3.8}{\ignorespaces Schema FilterElement-Aufbau\relax }}{29}{figure.caption.15}
+\contentsline {figure}{\numberline {\relax 3.9}{\ignorespaces Kartesisches Produkt \cite {Wikipedia}\relax }}{30}{figure.caption.16}
+\contentsline {figure}{\numberline {\relax 3.10}{\ignorespaces Vergleich: Schr\IeC {\"a}ge Spaltenk\IeC {\"o}pfe - Normale Tabelle\relax }}{31}{figure.caption.17}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Schr\IeC {\"a}ge Spaltenk\IeC {\"o}pfe}}}{31}{subfigure.10.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Normale Tabelle}}}{31}{subfigure.10.2}
+\contentsline {figure}{\numberline {\relax 3.11}{\ignorespaces Schr\IeC {\"a}ge Spaltenk\IeC {\"o}pfe mit Gruppierung\relax }}{32}{figure.caption.18}
+\contentsline {figure}{\numberline {\relax 3.12}{\ignorespaces Design Ergebnistabelle\relax }}{33}{figure.caption.19}
+\contentsline {figure}{\numberline {\relax 3.13}{\ignorespaces Klassendiagramm Ergebnisansicht\relax }}{35}{figure.caption.20}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 4.1}{\ignorespaces Liste: Ausgangszustand\relax }}{39}{figure.caption.21}
-\contentsline {figure}{\numberline {\relax 4.2}{\ignorespaces Design-Vorschl\IeC {\"a}ge\relax }}{39}{figure.caption.22}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Design 1}}}{39}{subfigure.2.1}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Design 2}}}{39}{subfigure.2.2}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Design 3}}}{39}{subfigure.2.3}
+\contentsline {figure}{\numberline {\relax 4.1}{\ignorespaces Liste: Ausgangszustand\relax }}{40}{figure.caption.21}
+\contentsline {figure}{\numberline {\relax 4.2}{\ignorespaces Design-Vorschl\IeC {\"a}ge\relax }}{40}{figure.caption.22}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Design 1}}}{40}{subfigure.2.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Design 2}}}{40}{subfigure.2.2}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Design 3}}}{40}{subfigure.2.3}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

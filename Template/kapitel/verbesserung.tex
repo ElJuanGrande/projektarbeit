@@ -1,5 +1,5 @@
 \chapter{Implementierung der Usability-Verbesserungen}
-\section{Präsentation von 2-teiligen Texten in ListCells} \label{sec:verbListCell}
+\section{Präsentation 2-teiliger Texte in ListCells} \label{sec:verbListCell}
 Die Umsetzung des zweiten Designvorschlages ist nicht so einfach möglich, wie die Grafik zunächst vermuten lässt. Es ist standardmäßig nicht möglich den Text, der in dem Textbereich einer ListCell eingefügt werden soll zu teilen und zwei verschiedene Styles (Per \gls{css}-Klasse) auf die Teile des Textes anzuwenden.
 
 Wenn man nicht die ListCell-Klasse erweitern und stark verändern möchte, bleibt nur die Möglichkeit, über die Graphic, die gesetzt werden kann, einen Text einzufügen. Die Graphic entspricht hier nicht einer Grafik im allgemein gebräuchlichen Sinne, sondern einem \gls{javafx} Node, der eine beliebige Ausprägung haben kann. So könnten in der Theorie auch sehr komplexe Elemente als Listenelemente dargestellt werden.
@@ -8,7 +8,7 @@ Der Text, der in den Listenzellen angezeigt werden soll, erhält die Klasse aus 
 
 Die Listenzelle muss jetzt nur noch überprüfen, ob es sich bei dem zurückgelieferten Wert um ein Objekt der Klasse \textit{MultiPartString} handelt und kann daraufhin den ersten Teil des Textes anders darstellen.
 
-Für das korrekte Layout wird ein sogenannter TextFlow verwendet, der die Abstände zwischen den Textpassagen so einstellt, dass die Teile wie ein einziger Fließtext wirken.
+Für das korrekte Layout wird eine HBox verwendet, deren innerer Abstand zwischen Elementen so eingestellt ist, dass die Teile wie ein einziger Fließtext wirken.
 
 \section{Filter-Performance} \label{sec:verbFilterPerformance}
 \textbf{Behebung: Listenaktualisierung}
@@ -32,7 +32,7 @@ Für den schnelleren Zugriff wurde eine weitere Datenstruktur eingeführt, die e
 
 In obigem Code-Beispiel wird die Zusammensetzung der neuen Datenstruktur gezeigt. Der erste generische Parameter steht für das Attribut, der zweite für den gesuchten Attributwert. Der dritte Parameter wird nicht verwendet und enthält nur der Boolean-Wert \textit{true}, damit ein Objekt für das Key-Paar vorhanden ist. Die Existenz eines Key-Paares kann dann mit \textit{\#contains(Object, Object)} überprüft werden. Die Laufzeit verringert sich dadurch von anfänglich mehreren Sekunden auf wenige Millisekunden. Um unnötigen Rechenaufwand zu vermeiden, wird die Struktur nur einmal aktualisiert, sobald sich die selektierten Werte verändert haben. Ein weiterer Vorteil ist, dass die Erzeugung von vielen Objekten des Typs \textit{Pair} wegfällt.
 
-\textbf{Quellcode-Usability}
+\section{\enquote{Quellcode-Usability}} \label{sec:verbQuellcode}
 
 Um das erste in Kapitel \ref{sec:quellcodeUsability} dargestellte \gls{usability}-Problem zu lösen, kann zum Beispiel die Anonyme Innere Klasse extrahiert werden und als eigenständige Klasse in einer eigenen Datei implementiert werden. Dadurch fiele außerdem der Instance Initializer weg, dessen Code stattdessen im Konstruktor ausgeführt werden kann. Referenzen in den übergeordneten Scope werden dem Konstruktoraufruf als Parameter übergeben.
 

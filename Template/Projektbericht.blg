@@ -18,48 +18,49 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: biblio/biblio.bib
 Warning--to sort, need author or key in OracleLambda
 Warning--to sort, need author or key in Command
+Warning--to sort, need author or key in Wikipedia
 Warning--to sort, need author or key in Oxford
 Warning--to sort, need author or key in DIN2006
 Warning--empty year in DIN2006
-You've used 16 entries,
+You've used 17 entries,
             4793 wiz_defined-function locations,
-            983 strings with 8479 characters,
-and the built_in function-call counts, 6531 in all, are:
-= -- 670
-> -- 123
+            987 strings with 8567 characters,
+and the built_in function-call counts, 6808 in all, are:
+= -- 700
+> -- 124
 < -- 140
 + -- 150
 - -- 34
-* -- 349
-:= -- 1065
-add.period$ -- 19
-call.type$ -- 16
-change.case$ -- 63
-chr.to.int$ -- 16
-cite$ -- 25
-duplicate$ -- 230
-empty$ -- 535
+* -- 365
+:= -- 1100
+add.period$ -- 20
+call.type$ -- 17
+change.case$ -- 66
+chr.to.int$ -- 17
+cite$ -- 28
+duplicate$ -- 242
+empty$ -- 566
 format.name$ -- 87
-if$ -- 1398
+if$ -- 1468
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 88
-newline$ -- 89
+missing$ -- 94
+newline$ -- 93
 num.names$ -- 36
-pop$ -- 124
+pop$ -- 131
 preamble$ -- 1
-purify$ -- 95
+purify$ -- 100
 quote$ -- 0
-skip$ -- 369
+skip$ -- 382
 stack$ -- 0
-substring$ -- 312
-swap$ -- 46
+substring$ -- 325
+swap$ -- 48
 text.length$ -- 26
 text.prefix$ -- 11
 top$ -- 0
-type$ -- 154
-warning$ -- 5
+type$ -- 164
+warning$ -- 6
 while$ -- 40
-width$ -- 21
-write$ -- 193
-(There were 5 warnings)
+width$ -- 23
+write$ -- 203
+(There were 6 warnings)
